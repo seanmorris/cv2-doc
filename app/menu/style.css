@@ -1,0 +1,68 @@
+.menu {
+	height: 100%;
+}
+
+.menu li {
+	cursor: pointer;
+	flex: 1;
+}
+
+ .menu ul {
+ 	display: flex;
+	flex-direction: column;
+}
+
+.menu ul li {
+	flex: 1;
+}
+
+.menu ul li > a:active {
+	opacity: 0.25;
+}
+
+body > .layout > .fill > .left-bar {
+	height: 100%;
+	overflow: hidden;
+	width: var(--menu-width);
+	width: 20em;
+}
+
+body > .layout > .fill > .left-bar:hover,
+body > .layout > .fill > .left-bar:focus-within {
+	overflow: auto;
+}
+
+body > .layout > .fill > .left-bar {
+	border-right: #CCC 1px solid;
+}
+
+body > .layout > .fill > .left-bar input {
+	position: sticky;
+	top: 0px;
+	width: 100%;
+	border: none;
+	border-bottom: #CCC 1px solid;
+	z-index: 1;
+	padding-left: 4rem;
+}
+body > .layout > .fill > .left-bar::before {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 2em;
+	height: 2em;
+	content: '';
+	z-index: 2;
+	padding: 1.25rem;
+	background-image: url(./search.svg);
+	background-size: 2em 2em;
+	background-position: 50% 45%;
+	background-repeat: no-repeat;
+	opacity: 0.5;
+	pointer-events: none;
+}
+
+.entry h5{
+	margin-top: 0px;
+	margin-bottom: 0px;
+}

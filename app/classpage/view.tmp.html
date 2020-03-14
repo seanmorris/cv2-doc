@@ -1,0 +1,433 @@
+<div class = "[[classList]]">
+	<h2>
+		<span cv-if = "final" data-icon = "/final.svg">
+			<img src = "/final.svg" />
+		</span>
+
+		<span cv-if = "abstract" data-icon = "/abstract.svg">
+			<img src = "/abstract.svg" />
+		</span>
+
+		<span cv-if = "isPlainClass" data-icon = "/icosahedron.svg">
+			<img src = "/icosahedron.svg" />
+		</span>
+
+		<span cv-if = "isTrait" data-icon = "/trait.svg">
+			<img src = "/trait.svg" />
+		</span>
+
+		<span cv-if = "isInterface" data-icon = "/interface.svg">
+			<img src = "/interface.svg" />
+		</span>
+		[[shortname]]
+	</h2>
+
+	<small><b>[[classname]]</b></small>
+
+	<p class = "collapsible class-types">
+		<span cv-if = "final">final</span>
+		<span cv-if = "abstract">abstract</span>
+		<span cv-if = "iterable">iterable</span>
+		<span cv-if = "isClass">class</span>
+		<span cv-if = "isInterface">interface</span>
+		<span cv-if = "isTrait">trait</span>
+	</p>
+
+	<span cv-if = "notes.summary">
+		<h6>Notes:</h6>
+		<p class = "pre" cv-bind = "notes.summary"></p>
+	</span>
+
+	<span cv-if = "notes.body">
+		<span data-collapse = "main">
+			<a href = "#" cv-on = 'click:expand(event, "main")'>more...</a>
+		</span>
+		<span data-expand = "main">
+			<a href = "#" cv-on = 'click:expand(event, "main")'>less</a>
+			<br />
+			<span class ="pre"><p cv-bind = "notes.body"></p></span>
+		</span>
+	</span>
+
+	<div class = "row legend">
+		<span data-icon = "/open-box.svg">
+			<img src = "/open-box.svg">-&nbsp;public
+		</span>
+		<span data-icon = "/closed-box.svg">
+			<img src = "/closed-box.svg">-&nbsp;protected
+		</span>
+		<span data-icon = "/lock.svg">
+			<img src = "/lock.svg">-&nbsp;private
+		</span>
+		<span data-icon = "/connected.svg">
+			<img src = "/connected.svg">-&nbsp;static
+		</span>
+	</div>
+	<div class = "row legend">
+		<span data-icon = "/inherit.svg">
+			<img src = "/inherit.svg" />-&nbsp;inherited
+		</span>
+		<span data-icon = "/override.svg">
+			<img src = "/override.svg" />-&nbsp;override
+		</span>
+		<span data-icon = "/link.svg">
+			<img src = "/link.svg">-&nbsp;reference
+		</span>
+	</div>
+
+	<small cv-if = "parent">
+		<i>Extends <a cv-link = "/class/[[encodedParent]]">[[parent]]</a></i>
+	</small>
+	
+	<small cv-if = "interfaces">
+		Implements: <span cv-each = "interfaces:interface:i" cv-delim = ", ">
+			<i><a cv-link = "/class/[[i|encodeURI]]">[[i]]</a></i>
+		</span>
+	</small>
+
+	<small><p>[[file]] : [[lines.0]] - [[lines.1]]</p></small>
+
+	<div class = "row summary">
+
+		<div cv-if = "methods">
+			<h3>
+				<span class = "icon" data-icon = "/function.svg">
+					<img src = "/function.svg" />
+				</span>
+				methods
+			</h3>
+			<ul cv-each = "methods:method:m">
+				<li>
+					<div cv-if = "!method.overrides" class = "row">
+						<span cv-if = "method.inherited" data-icon = "/inherit.svg">
+							<img src = "/inherit.svg" />
+						</span>
+					</div>
+
+					<span cv-if = "method.overrides" data-icon = "/override.svg">
+						<img src = "/override.svg" />
+					</span>
+					
+					<span cv-if = "method.icon" data-icon = "[[method.icon]]">
+						<img src = "[[method.icon]]" />
+					</span>
+					
+					<span cv-if = "method.scopeIcon" data-icon = "[[method.scopeIcon]]">
+						<img src = "[[method.scopeIcon]]" />
+					</span>
+					
+					<span cv-if = "method.refIcon" data-icon = "[[method.refIcon]]">
+						<img src = "[[method.refIcon]]" />
+					</span>
+
+					<a href = "#method-[[m]]">[[m]]()</a>
+
+				</li>
+			</ul>
+		</div>
+
+		<div cv-if = "properties">
+			<h3>
+				<span class = "icon" data-icon = "/field.svg">
+					<img src = "/field.svg" />
+				</span>
+				properties
+			</h3>
+			<ul cv-each = "properties:property:p">
+				<li>
+					<div cv-if = "!property.overrides" class = "row">
+						<span cv-if = "property.inherited" data-icon = "/inherit.svg">
+							<img src = "/inherit.svg" />
+						</span>
+					</div>
+
+					<span cv-if = "property.overrides" data-icon = "/override.svg">
+						<img src = "/override.svg" />
+					</span>
+
+					<span cv-if = "property.icon" data-icon = "[[property.icon]]">
+						<img src = "[[property.icon]]" />
+					</span>
+
+					<span cv-if = "property.scopeIcon" data-icon = "[[property.scopeIcon]]">
+						<img src = "[[property.scopeIcon]]" />
+					</span>
+
+					<a href = "#property-[[p]]">[[p]]</a>
+					<small cv-if = "property.defaultString">= [[property.defaultString]]</small>
+				</li>
+			</ul>
+		</div>
+
+		<div cv-if = "constants">
+			<h3>
+				<span class = "icon" data-icon = "/constant.svg">
+					<img src = "/constant.svg" />
+				</span>
+				contstants
+			</h3>
+			<ul cv-each = "constants:constant:c">
+				<li>
+					<div cv-if = "!constant.overrides" class = "row">
+						<span cv-if = "constant.inherited" data-icon = "/inherit.svg">
+							<img src = "/inherit.svg" />
+						</span>
+					</div>
+
+					<span cv-if = "constant.overrides" data-icon = "/override.svg">
+						<img src = "/override.svg" />
+					</span>
+
+					<span cv-if = "constant.icon" data-icon = "[[constant.icon]]">
+						<img src = "[[constant.icon]]" />
+					</span>
+
+					<a href = "#constant-[[c]]">[[c]]</a>
+					<small>= [[constant.valueString]]</small>
+				</li>
+			</ul>
+		</div>
+
+	</div>
+
+	<div cv-if = "methods">
+		<h3>
+			<span class = "icon" data-icon = "/function.svg">
+				<img src = "/function.svg" />
+			</span>
+			methods
+		</h3>
+		<ul class = "methods details" cv-each = "methods:method:m">
+			<li cv-with = "method" cv-carry = "m"  id = "method-[[m]]" class = "entry">
+
+				<div class = "row pad">
+					<span class = "icon" data-icon = "/function.svg">
+						<img src = "/function.svg" />
+					</span>
+
+					<span class = "icon" cv-if = "icon" data-icon = "[[icon]]">
+						<img src = "[[icon]]" />
+					</span>
+
+					<span class = "icon" cv-if = "scopeIcon" data-icon = "[[scopeIcon]]">
+						<img src = "[[scopeIcon]]" />
+					</span>
+
+					<h4>
+						[[m]]()
+					</h4>
+				</div>
+
+				<span class = "method-types pad-horizontal scope">
+					<span cv-if = "inherited">inherited</span>
+					<span cv-if = "final">final</span>
+					<span cv-if = "abstract">abstract</span>
+					<span cv-if = "public">public</span>
+					<span cv-if = "protected">protected</span>
+					<span cv-if = "private">private</span>
+					<span cv-if = "static">static</span>
+					<span cv-if = "variadic">variadic</span>
+					<span cv-if = "generator">generator</span>
+					<span cv-if = "overrides">override</span>
+					<span>method</span>
+				</span>
+				<!-- overrides -->	
+
+				<div class = "pad-horizontal pre" cv-bind = "notes.summary"></div>
+				<div class = "pad pre" cv-bind = "notes.body"></div>
+
+				<div class = "col pad-horizontal">
+					<span class = "row">
+						<h5>class:</h5>
+						<p>
+							<span cv-if = "!inherited" cv-bind = "class"></span>
+							<span cv-if = "inherited">
+								<a href = "[[encodedClass]]" cv-bind = "class"></a>
+							</span>
+						</p>
+					</span>
+
+					<span class = "row" cv-if = "file">
+						<h5>file:</h5>
+						<span cv-bind = "file"></span>
+						: <span cv-bind = "lines.0"></span>
+						- <span cv-bind = "lines.1"></span>
+					</span>
+
+					<span class = "row" cv-if = "overriden">
+						<h5>overrides:</h5>
+						<a cv-link = "/class/[[overrides.0|encodeURI]]" cv-bind = "overrides.0"></a> :: <span cv-bind = "overrides.1"></span>()
+					</span>
+				</div>
+
+				<div class = "params" cv-if = "parameters">
+					<h5 class = "pad-horizontal">parameters:</h5>
+					<div  class = "row" cv-each = "parameters:param:p" cv-delim = ",">
+						<div class = "param pad-horizontal nowrap" cv-with = "param" cv-carry = "p">
+							<h6><span cv-if = "variadic">...</span>[[p]]</h6>
+							<p class = "param-types col" classs = "scope">
+								<span cv-if = "!optional">required</span>
+								<span cv-if = "optional">optional</span>
+								<span cv-if = "reference">reference</span>
+								<span cv-if = "hasDefault">default</span>
+								<span cv-if = "callable">callable</span>
+								<span cv-if = "array">array</span>
+								<span cv-if = "variadic">variadic</span>
+							</p>
+							<small cv-if = "hasDefault">[[defaultString]]</small>
+						</div>
+					</div>
+				</div>
+				
+				<!-- <div class = "pad-horizontal pad-bottom">
+					<h5>tags</h5>
+					<span class = "pre" cv-bind = "rawTags"></span>
+				</div> -->
+
+			</li>
+		</ul>
+	</div>
+
+	<div cv-if = "properties">
+		<h3>
+			<span class = "icon" data-icon = "/field.svg">
+				<img src = "/field.svg" />
+			</span>
+			properties
+		</h3>
+		<ul class = "properties details" cv-each = "properties:property:p">
+			<li cv-with = "property" cv-carry = "p"  id = "property-[[p]]" class = "entry">
+		
+				<div class = "row pad">
+
+					<span class = "icon" data-icon = "/field.svg">
+						<img src = "/field.svg" />
+					</span>
+
+					<span class = "icon" cv-if = "icon" data-icon = "[[icon]]">
+						<img src = "[[icon]]" />
+					</span>
+
+					<span class = "icon" cv-if = "scopeIcon" data-icon = "[[scopeIcon]]">
+						<img src = "[[scopeIcon]]" />
+					</span>
+					
+					<span class = "icon" cv-if = "refIcon" data-icon = "[[refIcon]]">
+						<img src = "[[refIcon]]" />
+					</span>
+
+					<span cv-if = "inherited" data-icon = "/inherit.svg">
+						<img src = "/inherit.svg" />
+					</span>
+					
+					<h4>
+						[[p]]
+					</h4>
+				</div>
+
+				<div class = "pad-horizontal pre" cv-bind = "notes.summary"></div>
+				<div class = "pad pre" cv-bind = "notes.body"></div>
+
+				<span class = "method-types pad-horizontal scope">
+					<span cv-if = "inherited">inherited</span>
+					<span cv-if = "final">final</span>
+					<span cv-if = "abstract">abstract</span>
+					<span cv-if = "abstract">abstract</span>
+					<span cv-if = "public">public</span>
+					<span cv-if = "protected">protected</span>
+					<span cv-if = "private">private</span>
+					<span cv-if = "static">static</span>
+					<span>property</span>
+				</span>
+
+				<div class = "col pad-horizontal">
+					<span class = "row">
+						<h5>class:</h5>
+						<p>
+							<span cv-if = "!inherited" cv-bind = "class"></span>
+							<span cv-if = "inherited">
+								<a href = "[[encodedClass]]" cv-bind = "class"></a>
+							</span>
+						</p>
+					</span>
+
+					<span class = "row" cv-if = "file">
+						<h5>file:</h5>
+						<span cv-bind = "file"></span>
+					</span>
+
+					<span class = "row" cv-if = "defaultString">
+						<h5>default:</h5>
+						<p><span class = "pre" cv-bind = "defaultString"></span></p>
+					</span>
+				</div>
+
+				<span class = "pad" cv-bind = "notes.body"></span>
+
+			</li>
+		</ul>
+	</div>
+
+	<div cv-if = "constants">
+		<h3>
+			<span class = "icon" data-icon = "/constant.svg">
+				<img src = "/constant.svg" />
+			</span>
+			contstants
+		</h3>
+		<ul class = "properties details" cv-each = "constants:constant:c">
+			<li cv-with = "constant" cv-carry = "c"  id = "constant-[[c]]" class = "entry">
+		
+				<div class = "row pad">
+					<span class = "icon" data-icon = "/constant.svg">
+						<img src = "/constant.svg" />
+					</span>
+
+					<span class = "icon" cv-if = "icon" data-icon = "[[icon]]">
+						<img src = "[[icon]]" />
+					</span>
+
+					<h4>[[c]]</h4>
+				</div>
+
+				<span class = "pad pre" cv-bind = "notes.summary"></span>
+				<span class = "method-types pad-horizontal scope">
+					<span cv-if = "public">public</span>
+					<span cv-if = "protected">protected</span>
+					<span cv-if = "private">private</span>
+					<span cv-if = "static">static</span>
+					<span cv-if = "inherited">inherited</span>
+					<span>constant</span>
+				</span>
+
+				<div class = "pad-horizontal pre" cv-bind = "notes.summary"></div>
+				<div class = "pad pre" cv-bind = "notes.body"></div>
+
+				<div class = "col pad-horizontal">
+					<span class = "row">
+						<h5>class:</h5>
+						<p>
+							<span cv-if = "!inherited" cv-bind = "class"></span>
+							<span cv-if = "inherited">
+								<a href = "[[encodedClass]]" cv-bind = "class"></a>
+							</span>
+						</p>
+					</span>
+
+					<span class = "row" cv-if = "file">
+						<h5>file:</h5>
+						<span cv-bind = "file"></span>
+					</span>
+
+					<span cv-if = "valueString" class = "row">
+						<h5>value:</h5>
+						<p><span class = "pre" cv-bind = "valueString"></span></p>
+					</span>
+				</div>
+
+				<span class = "pad" cv-bind = "notes.body"></span>
+			</li>
+		</ul>
+	</div>
+	<!-- <span class = "pad pre" cv-bind = "dump"></span> -->
+</div>

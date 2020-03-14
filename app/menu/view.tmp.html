@@ -1,0 +1,61 @@
+<div class = "menu" tabindex="0">
+
+	<input cv-bind = "filter" placeholder = "search" />
+
+	<ul cv-if = "!filter">
+		<li class = "pad-horizontal" tabindex="0">
+			<a class = "row nowrap" cv-link = "/">
+				<span data-icon = "/home.svg" title = "home">
+					<img src = "/home.svg" />
+				</span>
+				home
+			</a>
+		</li>
+		<li class = "pad-horizontal" tabindex="0">
+			<a class = "row nowrap" cv-link = "/readme">
+				<span data-icon = "/readme.svg" title = "readme">
+					<img src = "/readme.svg" />
+				</span>
+				readme
+			</a>
+		</li>
+		<li class = "pad-horizontal" tabindex="0">
+			<a class = "row nowrap" cv-link = "/license">
+				<span data-icon = "/license.svg" title = "license class">
+					<img src = "/license.svg" />
+				</span>
+				license
+			</a>
+		</li>
+	</ul>
+
+	<ul cv-each = "filteredClasses:class:c">
+		<li class = "pad-horizontal" tabindex="0">
+			<a class = "row nowrap" cv-link = "/class/[[class.classname|encodeURI]]">
+				<span cv-if = "class.final" data-icon = "/final.svg" title = "final class">
+					<img src = "/final.svg" />
+				</span>
+
+				<span cv-if = "class.abstract" data-icon = "/abstract.svg" title = "abstract class">
+					<img src = "/abstract.svg" />
+				</span>
+
+				<div cv-if = "class.isPlainClass" data-icon = "/icosahedron.svg" title = "class">
+					<img src = "/icosahedron.svg" />
+				</div>
+
+				<span cv-if = "class.isTrait" data-icon = "/trait.svg" title = "trait">
+					<img src = "/trait.svg" />
+				</span>
+
+				<span cv-if = "class.isInterface" data-icon = "/interface.svg" title = "interface">
+					<img src = "/interface.svg" />
+				</span>
+			
+				[[class.classname]]
+			</span>
+
+		</ul>
+	</ul>
+
+</div>
