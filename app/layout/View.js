@@ -35,7 +35,7 @@ export class View extends BaseView
 
 				if(this.templates['readme'])
 				{
-					const view = new View;
+					const view = new BaseView;
 
 					view.template = this.templates['readme'];
 					
@@ -55,13 +55,19 @@ export class View extends BaseView
 					}
 				).then(response => {
 
-					const view = new View;
+					const view = new BaseView;
 
 					view.template = response.response;
 
 					this.templates['readme'] = response.response;
 
 					return view;
+				}).catch((error) => {
+
+					console.log(error);
+
+					return error.message || 'Unexpected error occurred.'
+
 				});
 			}
 
@@ -69,7 +75,7 @@ export class View extends BaseView
 
 				if(this.templates['license'])
 				{
-					const view = new View;
+					const view = new BaseView;
 
 					view.template = this.templates['license'];
 					
@@ -89,13 +95,20 @@ export class View extends BaseView
 					}
 				).then(response => {
 
-					const view = new View;
+					const view = new BaseView;
 
 					view.template = response.response;
 
 					this.templates['license'] = response.response;
 
 					return view;
+
+				}).catch((error) => {
+
+					console.log(error);
+
+					return error.message || 'Unexpected error occurred.'
+
 				});
 			}
 
@@ -129,7 +142,7 @@ export class View extends BaseView
 
 				console.log(404, args, location.pathname);
 
-				return '404!!!';
+				return '404 - Page not found.';
 
 			}
 		};

@@ -1,10 +1,10 @@
-<div class = "menu [[active]]" cv-on = "click:startClick(event)" tabindex="0">
+<div class = "menu [[active]]" cv-on = "click:activate(event)" tabindex="0">
 
 	<input cv-bind = "filter" placeholder = "search" />
 
 	<ul cv-if = "!filter">
 		<li class = "pad-horizontal" tabindex="0">
-			<a class = "row nowrap" cv-link = "/">
+			<a class = "row nowrap" href = "/" cv-on = "click:click(event, '');">
 				<span data-icon = "/home.svg" title = "home">
 					<img src = "/home.svg" />
 				</span>
@@ -12,7 +12,7 @@
 			</a>
 		</li>
 		<li class = "pad-horizontal" tabindex="0">
-			<a class = "row nowrap" cv-link = "/readme">
+			<a class = "row nowrap" href = "/readme" cv-on = "click:click(event, 'readme');">
 				<span data-icon = "/readme.svg" title = "readme">
 					<img src = "/readme.svg" />
 				</span>
@@ -20,7 +20,7 @@
 			</a>
 		</li>
 		<li class = "pad-horizontal" tabindex="0">
-			<a class = "row nowrap" cv-link = "/license">
+			<a class = "row nowrap" href = "/license" cv-on = "click:click(event, 'license');">
 				<span data-icon = "/license.svg" title = "license class">
 					<img src = "/license.svg" />
 				</span>

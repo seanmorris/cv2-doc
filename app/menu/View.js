@@ -49,18 +49,26 @@ export class View extends BaseView
 		}, {wait: 300});
 	}
 
-	click(event, clickedClass)
+	click(event, clickedClass = '')
 	{
+		this.deactivate();
+		
 		event.stopPropagation();
 		event.preventDefault();
 
+		if(!clickedClass || typeof clickedClass === 'string')
+		{
+			Router.go('/' + clickedClass);
+			return;
+		}
+
 		const pathname = '/class/' + encodeURIComponent(clickedClass.classname);
-		this.args.active = 'inactive';
+		
 
 		Router.go(pathname);
 	}
 
-	startClick()
+	activate()
 	{
 		this.args.active = 'active';
 	}

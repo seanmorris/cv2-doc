@@ -1,5 +1,5 @@
 <div class = "[[classList]]">
-	<h2>
+	<h2 class = "mono">
 		<span cv-if = "final" data-icon = "/final.svg">
 			<img src = "/final.svg" />
 		</span>
@@ -22,7 +22,7 @@
 		[[shortname]]
 	</h2>
 
-	<small><b>[[classname]]</b></small>
+	<small class = "mono"><b>[[classname]]</b></small>
 
 	<p class = "collapsible class-types">
 		<span cv-if = "final">final</span>
@@ -76,16 +76,16 @@
 	</div>
 
 	<small cv-if = "parent">
-		<i>Extends <a cv-link = "/class/[[encodedParent]]">[[parent]]</a></i>
+		<i>Extends <a cv-link = "/class/[[encodedParent]]" class = "mono">[[parent]]</a></i>
 	</small>
 	
 	<small cv-if = "interfaces">
 		Implements: <span cv-each = "interfaces:interface:i" cv-delim = ", ">
-			<i><a cv-link = "/class/[[i|encodeURI]]">[[i]]</a></i>
+			<i><a cv-link = "/class/[[i|encodeURI]]" class = "mono">[[i]]</a></i>
 		</span>
 	</small>
 
-	<small><p>[[file]] : [[lines.0]] - [[lines.1]]</p></small>
+	<small><p class = "mono">[[file]]:[[lines.0]]-[[lines.1]]</p></small>
 
 	<div class = "row summary">
 
@@ -98,7 +98,7 @@
 			</h3>
 			<ul cv-each = "methods:method:m">
 				<li>
-					<div cv-if = "!method.overrides" class = "row">
+<!-- 					<div cv-if = "!method.overrides" class = "row">
 						<span cv-if = "method.inherited" data-icon = "/inherit.svg">
 							<img src = "/inherit.svg" />
 						</span>
@@ -106,7 +106,7 @@
 
 					<span cv-if = "method.overrides" data-icon = "/override.svg">
 						<img src = "/override.svg" />
-					</span>
+					</span> -->
 					
 					<span cv-if = "method.icon" data-icon = "[[method.icon]]">
 						<img src = "[[method.icon]]" />
@@ -116,11 +116,11 @@
 						<img src = "[[method.scopeIcon]]" />
 					</span>
 					
-					<span cv-if = "method.refIcon" data-icon = "[[method.refIcon]]">
+<!-- 					<span cv-if = "method.refIcon" data-icon = "[[method.refIcon]]">
 						<img src = "[[method.refIcon]]" />
-					</span>
+					</span> -->
 
-					<a href = "#method-[[m]]">[[m]]()</a>
+					<a href = "#method-[[m]]" class = "mono">[[m]]()</a>
 
 				</li>
 			</ul>
@@ -135,7 +135,7 @@
 			</h3>
 			<ul cv-each = "properties:property:p">
 				<li>
-					<div cv-if = "!property.overrides" class = "row">
+<!-- 					<div cv-if = "!property.overrides" class = "row">
 						<span cv-if = "property.inherited" data-icon = "/inherit.svg">
 							<img src = "/inherit.svg" />
 						</span>
@@ -144,7 +144,7 @@
 					<span cv-if = "property.overrides" data-icon = "/override.svg">
 						<img src = "/override.svg" />
 					</span>
-
+ -->
 					<span cv-if = "property.icon" data-icon = "[[property.icon]]">
 						<img src = "[[property.icon]]" />
 					</span>
@@ -153,8 +153,8 @@
 						<img src = "[[property.scopeIcon]]" />
 					</span>
 
-					<a href = "#property-[[p]]">[[p]]</a>
-					<small cv-if = "property.defaultString">= [[property.defaultString]]</small>
+					<a href = "#property-[[p]]" class = "mono">[[p]]</a>
+					<small cv-if = "property.defaultString" class = "mono">= [[property.defaultString]]</small>
 				</li>
 			</ul>
 		</div>
@@ -182,8 +182,8 @@
 						<img src = "[[constant.icon]]" />
 					</span>
 
-					<a href = "#constant-[[c]]">[[c]]</a>
-					<small>= [[constant.valueString]]</small>
+					<a href = "#constant-[[c]]" class = "mono">[[c]]</a>
+					<small class = "mono">= [[constant.valueString]]</small>
 				</li>
 			</ul>
 		</div>
@@ -213,9 +213,7 @@
 						<img src = "[[scopeIcon]]" />
 					</span>
 
-					<h4>
-						[[m]]()
-					</h4>
+					<h4 class = "mono">[[m]]()</h4>
 				</div>
 
 				<span class = "method-types pad-horizontal scope">
@@ -237,9 +235,9 @@
 				<div class = "pad pre" cv-bind = "notes.body"></div>
 
 				<div class = "col pad-horizontal">
-					<span class = "row">
+					<span class = "row b">
 						<h5>class:</h5>
-						<p>
+						<p class = "mono">
 							<span cv-if = "!inherited" cv-bind = "class"></span>
 							<span cv-if = "inherited">
 								<a href = "[[encodedClass]]" cv-bind = "class"></a>
@@ -247,14 +245,14 @@
 						</p>
 					</span>
 
-					<span class = "row" cv-if = "file">
+					<span class = "row b" cv-if = "file">
 						<h5>file:</h5>
-						<span cv-bind = "file"></span>
-						: <span cv-bind = "lines.0"></span>
-						- <span cv-bind = "lines.1"></span>
+						<span cv-bind = "file" class = "mono"></span>
+						: <span cv-bind = "lines.0" class = "mono"></span>
+						- <span cv-bind = "lines.1" class = "mono"></span>
 					</span>
 
-					<span class = "row" cv-if = "overriden">
+					<span class = "row b" cv-if = "overriden">
 						<h5>overrides:</h5>
 						<a cv-link = "/class/[[overrides.0|encodeURI]]" cv-bind = "overrides.0"></a> :: <span cv-bind = "overrides.1"></span>()
 					</span>
@@ -262,9 +260,9 @@
 
 				<div class = "params" cv-if = "parameters">
 					<h5 class = "pad-horizontal">parameters:</h5>
-					<div  class = "row" cv-each = "parameters:param:p" cv-delim = ",">
+					<div  class = "row s" cv-each = "parameters:param:p" cv-delim = ",">
 						<div class = "param pad-horizontal nowrap" cv-with = "param" cv-carry = "p">
-							<h6><span cv-if = "variadic">...</span>[[p]]</h6>
+							<h6 class = "mono"><span cv-if = "variadic">...</span>[[p]]</h6>
 							<p class = "param-types col" classs = "scope">
 								<span cv-if = "!optional">required</span>
 								<span cv-if = "optional">optional</span>
@@ -274,7 +272,7 @@
 								<span cv-if = "array">array</span>
 								<span cv-if = "variadic">variadic</span>
 							</p>
-							<small cv-if = "hasDefault">[[defaultString]]</small>
+							<small cv-if = "hasDefault" class = "mono">[[defaultString]]</small>
 						</div>
 					</div>
 				</div>
@@ -320,7 +318,7 @@
 						<img src = "/inherit.svg" />
 					</span>
 					
-					<h4>
+					<h4 class = "mono">
 						[[p]]
 					</h4>
 				</div>
@@ -341,9 +339,9 @@
 				</span>
 
 				<div class = "col pad-horizontal">
-					<span class = "row">
+					<span class = "row b">
 						<h5>class:</h5>
-						<p>
+						<p class = "mono">
 							<span cv-if = "!inherited" cv-bind = "class"></span>
 							<span cv-if = "inherited">
 								<a href = "[[encodedClass]]" cv-bind = "class"></a>
@@ -351,14 +349,14 @@
 						</p>
 					</span>
 
-					<span class = "row" cv-if = "file">
+					<span class = "row b" cv-if = "file">
 						<h5>file:</h5>
-						<span cv-bind = "file"></span>
+						<span cv-bind = "file" class = "mono"></span>
 					</span>
 
-					<span class = "row" cv-if = "defaultString">
+					<span class = "row b" cv-if = "defaultString">
 						<h5>default:</h5>
-						<p><span class = "pre" cv-bind = "defaultString"></span></p>
+						<p><span class = "pre mono" cv-bind = "defaultString"></span></p>
 					</span>
 				</div>
 
@@ -387,7 +385,7 @@
 						<img src = "[[icon]]" />
 					</span>
 
-					<h4>[[c]]</h4>
+					<h4 class = "mono">[[c]]</h4>
 				</div>
 
 				<span class = "pad pre" cv-bind = "notes.summary"></span>
@@ -404,9 +402,9 @@
 				<div class = "pad pre" cv-bind = "notes.body"></div>
 
 				<div class = "col pad-horizontal">
-					<span class = "row">
+					<span class = "row b">
 						<h5>class:</h5>
-						<p>
+						<p class = "mono">
 							<span cv-if = "!inherited" cv-bind = "class"></span>
 							<span cv-if = "inherited">
 								<a href = "[[encodedClass]]" cv-bind = "class"></a>
@@ -414,14 +412,14 @@
 						</p>
 					</span>
 
-					<span class = "row" cv-if = "file">
+					<span class = "row b" cv-if = "file">
 						<h5>file:</h5>
-						<span cv-bind = "file"></span>
+						<span cv-bind = "file" class = "mono"></span>
 					</span>
 
-					<span cv-if = "valueString" class = "row">
+					<span cv-if = "valueString" class = "row b">
 						<h5>value:</h5>
-						<p><span class = "pre" cv-bind = "valueString"></span></p>
+						<p><span class = "pre mono" cv-bind = "valueString"></span></p>
 					</span>
 				</div>
 

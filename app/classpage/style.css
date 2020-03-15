@@ -134,7 +134,7 @@ h3 {
 .summary li {
 	display: flex;
 	flex-direction: row;
-	align-items: stretch;
+	align-items: center;
 }
 
 .entry .icon {
@@ -169,6 +169,7 @@ h2, h3, .summary li > * {
 
 .entry h6 {
 	text-decoration: underline;
+	font-size: 0.95em;
 }
 
 h3 [data-icon] {
