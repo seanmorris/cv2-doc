@@ -133,5 +133,11 @@ export class View extends BaseView
 
 			}
 		};
+
+		this.args.menuActive = '';
+
+		this.args.menu.args.bindTo('active', (v) => {
+			this.args.menuActive = `menu-${v}`;
+		});
 	}
 }

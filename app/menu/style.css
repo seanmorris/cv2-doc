@@ -1,5 +1,6 @@
 .menu {
 	height: 100%;
+	position: relative;
 }
 
 .menu li {
@@ -23,8 +24,6 @@
 body > .layout > .fill > .left-bar {
 	height: 100%;
 	overflow: hidden;
-	width: var(--menu-width);
-	width: 20em;
 }
 
 body > .layout > .fill > .left-bar:hover,
@@ -45,14 +44,14 @@ body > .layout > .fill > .left-bar input {
 	z-index: 1;
 	padding-left: 4rem;
 }
-body > .layout > .fill > .left-bar::before {
+body > .layout > .fill > .left-bar .menu::before {
 	position: absolute;
 	top: 0px;
 	left: 0px;
 	width: 2em;
 	height: 2em;
+	z-index: 20;
 	content: '';
-	z-index: 2;
 	padding: 1.25rem;
 	background-image: url(./search.svg);
 	background-size: 2em 2em;
@@ -65,4 +64,13 @@ body > .layout > .fill > .left-bar::before {
 .entry h5{
 	margin-top: 0px;
 	margin-bottom: 0px;
+}
+
+.menu.active {
+	
+}
+
+.menu.inactive li {
+	pointer-events: none;
+	opacity: 0.5;
 }

@@ -12,9 +12,10 @@ export class View extends BaseView
 
 		this.args.prefix = '';
 		this.args.filter = '';
-		
+		this.args.active = 'inactive';
+
 		this.args.filteredClasses = this.args.filteredClasses || [];
-		
+
 		this.args.docs = this.args.docs || [];
 
 		this.classBank = {};
@@ -37,9 +38,9 @@ export class View extends BaseView
 			Router.setQuery('q', v);
 
 			this.args.filteredClasses = classes.filter(
-			
+
 				c => c.showClassname.match(new RegExp(v, 'i'))
-			
+
 			).sort((a,b)=>{
 
 				return a.showClassname.localeCompare(b.showClassname);
@@ -50,9 +51,23 @@ export class View extends BaseView
 
 	click(event, clickedClass)
 	{
+		event.stopPropagation();
+		event.preventDefault();
+
 		const pathname = '/class/' + encodeURIComponent(clickedClass.classname);
+		this.args.active = 'inactive';
 
 		Router.go(pathname);
+	}
+
+	startClick()
+	{
+		this.args.active = 'active';
+	}
+
+	deactivate(event)
+	{
+		this.args.active = 'inactive';
 	}
 
 	encodeURI(x)

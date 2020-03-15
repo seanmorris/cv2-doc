@@ -1,4 +1,4 @@
-<div class = "menu" tabindex="0">
+<div class = "menu [[active]]" cv-on = "click:startClick(event)" tabindex="0">
 
 	<input cv-bind = "filter" placeholder = "search" />
 
@@ -31,7 +31,11 @@
 
 	<ul cv-each = "filteredClasses:class:c">
 		<li class = "pad-horizontal" tabindex="0">
-			<a class = "row nowrap" cv-link = "/class/[[class.classname|encodeURI]]">
+			<a
+				class = "row nowrap"
+				href  = "/class/[[class.classname|encodeURI]]"
+				cv-on = "click:click(event, class);blur:deactivate(event);"
+			>
 				<span cv-if = "class.final" data-icon = "/final.svg" title = "final class">
 					<img src = "/final.svg" />
 				</span>
