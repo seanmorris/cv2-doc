@@ -29,29 +29,40 @@ small:not(:empty) {
 	height: 0 !important;
 	-moz-scrollbars-none;*/
 
-	width: 8px;
+	width: 16px;
 	height: 0px;
+}
+
+*::-webkit-scrollbar-track {
+	background-color: rgba(0, 0, 0, 0.0);
 	position: absolute;
+	z-index: 0;
 }
 
-::-webkit-scrollbar-track {
-	background: rgba(0,0,0,0);
+.left-bar::-webkit-scrollbar-track {
+	border-left:  #CCC 1px solid;
 }
 
-::-webkit-scrollbar-thumb {
+*::-webkit-scrollbar-thumb {
+	padding: 12px !important;
+	background-clip: padding-box;
+	border: 5px solid rgba(0, 0, 0, 0);
+    background-clip: padding-box;
+	width: 8px;
+	background-color: rgba(0,0,0,0.25);
 	border-radius: 10px;
-	background: transparent;
-	background-color: white;
-	border: 1px #999 solid;
-	background: rgba(0,0,0,0.25);
-	height: 5em;
+	position: absolute;
+	z-index: 100;
+}
+
+.main-content {
 }
 
 ::-webkit-scrollbar-thumb:window-inactive {
-	background: rgba(0,0,0,0.1); 
+	background-color: rgba(0,0,0,0.125);
 }
 ::-webkit-scrollbar-thumb:hover {
-	background: rgba(0,0,0,0.5); 
+	background-color: rgba(0,0,0,0.5);
 }
 
 .mono {
@@ -109,13 +120,21 @@ a {
 }
 
 h5 {
-	font-size: 1em;
+	font-size: 1rem;
+}
+
+.entry h5 {
+	width: 7em;
+	text-align: right;
 }
 
 .center {
 	align-items: center;
 }
 
+.f { display: flex; }
+.g { flex-grow: 1; }
 .s { align-items: flex-start; }
+.st { align-items: stretch; }
 .e { align-items: flex-end; }
 .bl { align-items: baseline; }

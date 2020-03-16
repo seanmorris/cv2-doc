@@ -22,20 +22,26 @@
 		[[shortname]]
 	</h2>
 
-	<small class = "mono"><b>[[classname]]</b></small>
-
-	<p class = "collapsible class-types">
+	<p class = "collapsible class-types row">
 		<span cv-if = "final">final</span>
 		<span cv-if = "abstract">abstract</span>
 		<span cv-if = "iterable">iterable</span>
 		<span cv-if = "isClass">class</span>
 		<span cv-if = "isInterface">interface</span>
 		<span cv-if = "isTrait">trait</span>
+		<small class = "mono">
+			<b>[[classname]]</b>
+		</small>
 	</p>
 
+	<small class = "mono">
+		<a href = "https://github.com/seanmorris/ids/blob/master/[[file]]#L[[lines.0]]" target = "_blank">
+			[[file]] : [[lines.0]] - [[lines.1]]
+		</a>
+	</small>
+
 	<span cv-if = "notes.summary">
-		<h6>Notes:</h6>
-		<p class = "pre" cv-bind = "notes.summary"></p>
+		<p class = "pre pad-top" cv-bind = "notes.summary"></p>
 	</span>
 
 	<span cv-if = "notes.body">
@@ -49,7 +55,7 @@
 		</span>
 	</span>
 
-	<div class = "row legend">
+	<div class = "row legend pad-vertical">
 		<span data-icon = "/open-box.svg">
 			<img src = "/open-box.svg">-&nbsp;public
 		</span>
@@ -62,30 +68,26 @@
 		<span data-icon = "/connected.svg">
 			<img src = "/connected.svg">-&nbsp;static
 		</span>
-	</div>
-	<div class = "row legend">
+		<span data-icon = "/link.svg">
+			<img src = "/link.svg">-&nbsp;reference
+		</span>
 		<span data-icon = "/inherit.svg">
 			<img src = "/inherit.svg" />-&nbsp;inherited
 		</span>
 		<span data-icon = "/override.svg">
 			<img src = "/override.svg" />-&nbsp;override
 		</span>
-		<span data-icon = "/link.svg">
-			<img src = "/link.svg">-&nbsp;reference
-		</span>
 	</div>
 
 	<small cv-if = "parent">
 		<i>Extends <a cv-link = "/class/[[encodedParent]]" class = "mono">[[parent]]</a></i>
 	</small>
-	
+
 	<small cv-if = "interfaces">
 		Implements: <span cv-each = "interfaces:interface:i" cv-delim = ", ">
 			<i><a cv-link = "/class/[[i|encodeURI]]" class = "mono">[[i]]</a></i>
 		</span>
 	</small>
-
-	<small><p class = "mono">[[file]]:[[lines.0]]-[[lines.1]]</p></small>
 
 	<div class = "row summary">
 
@@ -107,15 +109,15 @@
 					<span cv-if = "method.overrides" data-icon = "/override.svg">
 						<img src = "/override.svg" />
 					</span> -->
-					
+
 					<span cv-if = "method.icon" data-icon = "[[method.icon]]">
 						<img src = "[[method.icon]]" />
 					</span>
-					
+
 					<span cv-if = "method.scopeIcon" data-icon = "[[method.scopeIcon]]">
 						<img src = "[[method.scopeIcon]]" />
 					</span>
-					
+
 <!-- 					<span cv-if = "method.refIcon" data-icon = "[[method.refIcon]]">
 						<img src = "[[method.refIcon]]" />
 					</span> -->
@@ -153,7 +155,7 @@
 						<img src = "[[property.scopeIcon]]" />
 					</span>
 
-					<a href = "#property-[[p]]" class = "mono">[[p]]</a>
+					<a href = "#property-[[p]]" class = "mono f">[[p]]</a>
 					<small cv-if = "property.defaultString" class = "mono">= [[property.defaultString]]</small>
 				</li>
 			</ul>
@@ -213,7 +215,18 @@
 						<img src = "[[scopeIcon]]" />
 					</span>
 
+					<div cv-if = "!overrides" class = "row">
+						<span cv-if = "inherited" data-icon = "/inherit.svg">
+							<img src = "/inherit.svg" />
+						</span>
+					</div>
+
+					<span cv-if = "overrides.0" data-icon = "/override.svg">
+						<img src = "/override.svg" />...
+					</span>
+
 					<h4 class = "mono">[[m]]()</h4>
+
 				</div>
 
 				<span class = "method-types pad-horizontal scope">
@@ -226,41 +239,52 @@
 					<span cv-if = "static">static</span>
 					<span cv-if = "variadic">variadic</span>
 					<span cv-if = "generator">generator</span>
-					<span cv-if = "overrides">override</span>
+					<span cv-if = "overrides.0">override</span>
 					<span>method</span>
 				</span>
-				<!-- overrides -->	
+				<!-- overrides -->
 
 				<div class = "pad-horizontal pre" cv-bind = "notes.summary"></div>
 				<div class = "pad pre" cv-bind = "notes.body"></div>
 
 				<div class = "col pad-horizontal">
-					<span class = "row b">
-						<h5>class:</h5>
-						<p class = "mono">
-							<span cv-if = "!inherited" cv-bind = "class"></span>
-							<span cv-if = "inherited">
-								<a href = "[[encodedClass]]" cv-bind = "class"></a>
-							</span>
-						</p>
-					</span>
-
-					<span class = "row b" cv-if = "file">
-						<h5>file:</h5>
-						<span cv-bind = "file" class = "mono"></span>
-						: <span cv-bind = "lines.0" class = "mono"></span>
-						- <span cv-bind = "lines.1" class = "mono"></span>
-					</span>
 
 					<span class = "row b" cv-if = "overriden">
 						<h5>overrides:</h5>
 						<a cv-link = "/class/[[overrides.0|encodeURI]]" cv-bind = "overrides.0"></a> :: <span cv-bind = "overrides.1"></span>()
 					</span>
+
+					<span class = "row b">
+						<h5>class:</h5>
+						<span class = "mono">
+							<span cv-if = "!inherited" cv-bind = "class"></span>
+							<span cv-if = "inherited">
+								<a href = "/class/[[encodedClass]]" cv-bind = "class"></a>
+							</span>
+						</span>
+					</span>
+
+					<span class = "row b" cv-if = "file">
+						<h5>file:</h5>
+						<a href = "https://github.com/seanmorris/ids/blob/master/[[file]]#L[[lines.0]]" target = "_blank">
+							<span cv-bind = "file" class = "mono"></span>
+							&nbsp;:&nbsp;<span cv-bind = "lines.0" class = "mono"></span>
+							&nbsp;-&nbsp;<span cv-bind = "lines.1" class = "mono"></span>
+						</a>
+					</span>
+
+					<span class = "row b"  cv-if = "parameters">
+						<h5>parameters:</h5>
+						<span class = "mono">[[parameters|arLen]]</span>
+						<span class = "icon" data-icon = "/turn.svg">
+							<img src = "/turn.svg" />
+						</span>
+					</span>
 				</div>
 
 				<div class = "params" cv-if = "parameters">
-					<h5 class = "pad-horizontal">parameters:</h5>
 					<div  class = "row s" cv-each = "parameters:param:p" cv-delim = ",">
+						<h5></h5>
 						<div class = "param pad-horizontal nowrap" cv-with = "param" cv-carry = "p">
 							<h6 class = "mono"><span cv-if = "variadic">...</span>[[p]]</h6>
 							<p class = "param-types col" classs = "scope">
@@ -276,7 +300,7 @@
 						</div>
 					</div>
 				</div>
-				
+
 				<!-- <div class = "pad-horizontal pad-bottom">
 					<h5>tags</h5>
 					<span class = "pre" cv-bind = "rawTags"></span>
@@ -295,7 +319,7 @@
 		</h3>
 		<ul class = "properties details" cv-each = "properties:property:p">
 			<li cv-with = "property" cv-carry = "p"  id = "property-[[p]]" class = "entry">
-		
+
 				<div class = "row pad">
 
 					<span class = "icon" data-icon = "/field.svg">
@@ -309,7 +333,7 @@
 					<span class = "icon" cv-if = "scopeIcon" data-icon = "[[scopeIcon]]">
 						<img src = "[[scopeIcon]]" />
 					</span>
-					
+
 					<span class = "icon" cv-if = "refIcon" data-icon = "[[refIcon]]">
 						<img src = "[[refIcon]]" />
 					</span>
@@ -317,7 +341,7 @@
 					<span cv-if = "inherited" data-icon = "/inherit.svg">
 						<img src = "/inherit.svg" />
 					</span>
-					
+
 					<h4 class = "mono">
 						[[p]]
 					</h4>
@@ -339,23 +363,31 @@
 				</span>
 
 				<div class = "col pad-horizontal">
+
+					<span class = "row b" cv-if = "overriden">
+						<h5>overrides:</h5>
+						<a cv-link = "/class/[[overrides.0|encodeURI]]" cv-bind = "overrides.0"></a> :: <span cv-bind = "overrides.1"></span>()
+					</span>
+
 					<span class = "row b">
 						<h5>class:</h5>
-						<p class = "mono">
+						<span class = "mono">
 							<span cv-if = "!inherited" cv-bind = "class"></span>
 							<span cv-if = "inherited">
-								<a href = "[[encodedClass]]" cv-bind = "class"></a>
+								<a href = "/class/[[encodedClass]]" cv-bind = "class"></a>
 							</span>
-						</p>
+						</span>
 					</span>
 
 					<span class = "row b" cv-if = "file">
 						<h5>file:</h5>
-						<span cv-bind = "file" class = "mono"></span>
+						<a href = "https://github.com/seanmorris/ids/blob/master/[[file]]#L[[lines.0]]" target = "_blank">
+							<span cv-bind = "file" class = "mono"></span>
+						</a>
 					</span>
 
 					<span class = "row b" cv-if = "defaultString">
-						<h5>default:</h5>
+						<h5 class = "s">default:</h5>
 						<p><span class = "pre mono" cv-bind = "defaultString"></span></p>
 					</span>
 				</div>
@@ -375,7 +407,7 @@
 		</h3>
 		<ul class = "properties details" cv-each = "constants:constant:c">
 			<li cv-with = "constant" cv-carry = "c"  id = "constant-[[c]]" class = "entry">
-		
+
 				<div class = "row pad">
 					<span class = "icon" data-icon = "/constant.svg">
 						<img src = "/constant.svg" />
@@ -404,22 +436,24 @@
 				<div class = "col pad-horizontal">
 					<span class = "row b">
 						<h5>class:</h5>
-						<p class = "mono">
+						<span class = "mono">
 							<span cv-if = "!inherited" cv-bind = "class"></span>
 							<span cv-if = "inherited">
-								<a href = "[[encodedClass]]" cv-bind = "class"></a>
+								<a href = "/class/[[encodedClass]]" cv-bind = "class"></a>
 							</span>
-						</p>
+						</span>>
 					</span>
 
 					<span class = "row b" cv-if = "file">
 						<h5>file:</h5>
-						<span cv-bind = "file" class = "mono"></span>
+						<a href = "https://github.com/seanmorris/ids/blob/master/[[file]]#L[[lines.0]]" target = "_blank">
+							<span cv-bind = "file" class = "mono"></span>
+						</a>
 					</span>
 
-					<span cv-if = "valueString" class = "row b">
+					<span  class = "row b" cv-if = "valueString">
 						<h5>value:</h5>
-						<p><span class = "pre mono" cv-bind = "valueString"></span></p>
+						<span class = "pre mono" cv-bind = "valueString"></span>
 					</span>
 				</div>
 

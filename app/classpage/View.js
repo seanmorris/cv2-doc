@@ -242,4 +242,9 @@ export class View extends BaseView
 	{
 		return encodeURIComponent(x);
 	}
+
+	arLen(x)
+	{
+		return x.length || Object.keys(x).length || 0;
+	}
 }

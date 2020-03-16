@@ -1,8 +1,11 @@
+<input cv-bind = "filter" placeholder = "search" cv-on = "focus:activate(event)" />
+
 <div class = "menu [[active]]" cv-on = "click:activate(event)" tabindex="0">
 
-	<input cv-bind = "filter" placeholder = "search" />
+	<b class = "pad-horizontal"><small>Pages</small></b>
 
 	<ul cv-if = "!filter">
+		
 		<li class = "pad-horizontal" tabindex="0">
 			<a class = "row nowrap" href = "/" cv-on = "click:click(event, '');">
 				<span data-icon = "/home.svg" title = "home">
@@ -11,6 +14,7 @@
 				home
 			</a>
 		</li>
+		
 		<li class = "pad-horizontal" tabindex="0">
 			<a class = "row nowrap" href = "/readme" cv-on = "click:click(event, 'readme');">
 				<span data-icon = "/readme.svg" title = "readme">
@@ -19,6 +23,7 @@
 				readme
 			</a>
 		</li>
+
 		<li class = "pad-horizontal" tabindex="0">
 			<a class = "row nowrap" href = "/license" cv-on = "click:click(event, 'license');">
 				<span data-icon = "/license.svg" title = "license class">
@@ -27,12 +32,23 @@
 				license
 			</a>
 		</li>
+
+<!-- 		<li class = "pad-horizontal" tabindex="0">
+			<a class = "row nowrap" href = "/whats-this?" cv-on = "click:click(event, 'whats-this?');">
+				<span data-icon = "/info.svg" title = "info class">
+					<img src = "/info.svg" />
+				</span>
+				what's this?
+			</a>
+		</li> -->
 	</ul>
+
+	<b class = "pad-horizontal"><small>Classes</small></b>
 
 	<ul cv-each = "filteredClasses:class:c">
 		<li class = "pad-horizontal" tabindex="0">
 			<a
-				class = "row nowrap"
+				class = "row nowrap classname"
 				href  = "/class/[[class.classname|encodeURI]]"
 				cv-on = "click:click(event, class);blur:deactivate(event);"
 			>
@@ -58,8 +74,8 @@
 			
 				[[class.classname]]
 			</span>
-
-		</ul>
+			</a>
+		</li>
 	</ul>
 
 </div>

@@ -23,23 +23,21 @@
 }
 
 body > .layout > .fill > .left-bar {
+	width: 22em;
 	height: 100%;
 	overflow-y: hidden;
 	overflow-x: hidden;
 }
 
 body > .layout.menu-active > .fill > .left-bar {
-	overflow-y: auto;
-	overflow-x: hidden;
-}
-
-body > .layout > .fill > .left-bar {
-	width: 21.75em;
+	overflow-y: scroll;
+	overflow-x: scroll;
 }
 
 body > .layout > .fill > .left-bar input {
 	position: sticky;
 	top: 0px;
+	left: 0px;
 	width: 100%;
 	border: none;
 	border-bottom: #CCC 1px solid;
@@ -68,11 +66,18 @@ body > .layout > .fill > .left-bar .menu::before {
 	margin-bottom: 0px;
 }
 
-.menu.active {
+.menu li, .menu h6 {
+	transition: opacity 0.5s ease-out, filter 0.5s ease-out;
 	
 }
 
-.menu.inactive li {
+
+.menu.inactive li, .menu.inactive h6 {
 	pointer-events: none;
 	opacity: 0.5;
+	filter: grayscale(1);
+}
+
+.menu small {
+	font-size: 0.85em;
 }

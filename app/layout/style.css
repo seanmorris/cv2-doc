@@ -20,15 +20,22 @@ body > .layout > .fill {
 
 body > .layout > .fill > .main-content {
 	transform: translateX(0);
-	transition: transform 0.25s ease-out, box-shadow 0.35s ease-out;
+	transition: transform 0.25s ease-out, box-shadow 0.3s ease-out;
 	position: absolute;
-	box-shadow: -10px 0px 10px rgba(0,0,0,0.25);
 	left: 4em;
 	z-index: 15;
 	flex: 1;
 	height: 100%;
-	width: calc(100% - 4.25em);
+	width: calc(100% - 4em);
 	background-color: #FFF;
+}
+
+body > .layout > .fill > .left-bar {
+	/*box-shadow: inset -10px 0px 10px rgba(0,0,0,0.25);*/
+}
+
+.layout.menu-inactive .main-content {
+	border-left: 1px solid #ccc;
 }
 
 body > .layout:not(.menu-active) > .fill > .main-content {
@@ -39,7 +46,7 @@ body > .layout.menu-active > .fill > .main-content {
 	perspective: 1000px;
 	transform-origin: 100% 50%;
 	transform: translateX(18em);
-	box-shadow: -30px 0px 30px rgba(0,0,0,0.25);
+	/*box-shadow: -30px 0px 30px rgba(0,0,0,0.25);*/
 }
 
 body > .layout > .header {
@@ -55,7 +62,6 @@ body > .layout > .fill > .left-bar input,
 body > .layout > .fill > .main-content,
 body > .layout > .footer {
 	padding: 1.25rem;
-	margin-bottom: 0.75em;
 }
 
 
@@ -99,12 +105,13 @@ div.loader {
 
 .home h1::after {
 	content: '℠';
-	font-size: 1.25rem;
+	font-size: 1.75rem;
 	position: absolute;
 	top: 0px;
 	right: 0px;
 	width: 0px;
 	overflow: visible;
+	padding: 2px;
 }
 
 .home h1 + b{

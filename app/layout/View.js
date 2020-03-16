@@ -4,7 +4,10 @@ import { View as BaseView } from 'curvature/base/View';
 import { View as ClassPage } from '../classpage/View';
 
 import { Loader } from './Loader';
-import { Home } from './Home';
+
+import { Home      } from './Home';
+import { WhatsThis } from './WhatsThis';
+import { Info      } from './Info';
 
 
 export class View extends BaseView
@@ -112,6 +115,19 @@ export class View extends BaseView
 				});
 			}
 
+			, 'whats-this': () => {
+
+				console.log('home', args);
+
+				return new WhatsThis;
+			}
+
+			, 'info': () => {
+
+				console.log('home', args);
+
+				return new Info;
+			}
 
 			, 'class/*': (args) => {
 
@@ -152,5 +168,10 @@ export class View extends BaseView
 		this.args.menu.args.bindTo('active', (v) => {
 			this.args.menuActive = `menu-${v}`;
 		});
+	}
+
+	deactivateMenu()
+	{
+		this.args.menu.deactivate();
 	}
 }

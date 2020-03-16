@@ -1,10 +1,10 @@
-h2 {
-	
+h2,h3,h4,h5,h6 {
+	padding-top: 0.75em;
+	padding-bottom: 0.75em;
 }
 
-h2,h3,h4,h5,h6 {
-	margin-top: 0.75em;
-	margin-bottom: 0.75em;
+h2 {
+	padding-bottom: 0em;
 }
 
 article {
@@ -40,7 +40,7 @@ p.pre:not(:empty), span.pre > p:not(:empty) {
 	border: 1px solid #CCC;
 	font-weight: bold;
 	padding: 1em;
-	box-shadow: 0.25em 0.25em 0.5em rgba(0,0,0,0.125);
+	/*box-shadow: 0.25em 0.25em 0.5em rgba(0,0,0,0.125);*/
 	margin-right: 2em;	
 	margin-bottom: 2em;	
 	margin-top: 2em;	
@@ -226,6 +226,13 @@ sup [data-icon] img {
 	padding: 0em;
 	width: 1.75em;
 	object-fit: cover;
+}
+
+[data-icon = "/turn.svg"] img {
+	padding: 0.25em;
+	position: relative;
+	left: 0.25em;
+	top: 0.5em;
 }
 
 .legend {
