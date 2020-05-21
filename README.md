@@ -8,6 +8,8 @@ cv2-doc can be hosted in github pages.
 
 cv2-doc is **serverless**.
 
+See an example [*here*](http://docs.ids.seanmorr.is/)
+
 ## Getting started
 
 Set up your app/Config.js file:
