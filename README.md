@@ -12,7 +12,7 @@ cv2-doc is **serverless**.
 
 Set up your app/Config.js file:
 
-```
+```js
 export class Config {}
 
 Config.title   = 'Ids - Sean Morris | cv2-doc'
