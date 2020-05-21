@@ -126,12 +126,19 @@ div.loader {
 .home .copyright {
 	position: absolute;
 	bottom: 1rem;
-	right: 1rem;
+	right:  0rem;
 	text-align: right;
 	opacity: 0.5;
 	font-weight: 800;
+	white-space: nowrap;
 }
 
 .plain {
 	font-size: 1.25em;
+}
+
+.home.col .col {
+	flex-grow: 1;
+	justify-content: center;
+	position: relative;
 }

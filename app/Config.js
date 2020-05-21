@@ -24,7 +24,7 @@ Config.repository = 'seanmorris/ids';
 Config.tagline    = 'The PHP + Docker Framework';
 
 Config.author     = 'Sean Morris';
-Config.copyright  = '2020 Sean Morris';
+Config.copyright  = '2011-2020 Sean Morris';
 
 Config.homeLinks  = {
 	github:      'https://github.com/seanmorris/ids'

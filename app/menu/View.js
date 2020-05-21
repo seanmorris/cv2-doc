@@ -19,34 +19,63 @@ export class View extends BaseView
 		this.args.docs = this.args.docs || [];
 
 		this.classBank = {};
+		this.loaded    = false;
 
-		this.args.bindTo('filter', (v) => {
+		this.args.bindTo('docs', (v) => {
 
-			const prefix = this.args.prefix;
+			if(this.loaded || !Object.keys(v).length)
+			{
+				return;
+			}
 
-			const classes = Object.keys(this.args.docs).map(c => {
+			this.loaded = true;
 
-				if(!this.classBank[c])
+			const docs = v;
+
+			this.args.bindTo('filter', (v) => {
+
+				const prefix = this.args.prefix;
+
+				const classes = Object.keys(docs).map(c => {
+
+					if(!this.classBank[c])
+					{
+						this.classBank[c] = docs[c];
+						
+						docs[c].showClassname = c;
+					}
+
+					return docs[c];
+				});
+
+				if(v)
 				{
-					this.classBank[c] = this.args.docs[c];
-					this.args.docs[c].showClassname = c;
+					Router.setQuery('q', v);
+				}
+				else
+				{
+					Router.setQuery('q', '');
 				}
 
-				return this.args.docs[c];
-			});
+				this.args.filteredClasses = classes.filter(
+					c => {
+						if(!v)
+						{
+							return true;
+						}
 
-			Router.setQuery('q', v);
+						return c.showClassname.match(new RegExp(v, 'i'))
+					}
+				).sort((a,b)=>{
 
-			this.args.filteredClasses = classes.filter(
+					return a.showClassname.localeCompare(b.showClassname);
 
-				c => c.showClassname.match(new RegExp(v, 'i'))
+				});
 
-			).sort((a,b)=>{
+			}, {wait: 300});
 
-				return a.showClassname.localeCompare(b.showClassname);
+		}, {wait: 0});
 
-			});
-		}, {wait: 300});
 	}
 
 	click(event, clickedClass = '')
