@@ -65,6 +65,8 @@ export class View extends BaseView
 				method.scopeIcon = this.getScopeIcon(method);
 				method.refIcon = this.getRefIcon(method);
 
+				method.parameterCount = Object.keys(method.parameters).length
+
 				for(const p in method.parameters)
 				{
 					const param = method.parameters[p];
@@ -230,8 +232,6 @@ export class View extends BaseView
 		{
 
 		}
-
-		console.log(bodyLines);
 
 		const body = bodyLines.join("\n");
 		const tags = tagLines;

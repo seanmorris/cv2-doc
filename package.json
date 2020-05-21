@@ -1,16 +1,15 @@
 {
-  "name": "brunch-app",
-  "description": "Brunch.io application",
-  "private": true,
-  "author": "Brunch",
-  "version": "0.0.1",
-  "repository": "",
+  "name": "cv2-doc",
+  "description": "CV2-based Documentation renderer.",
+  "author": "Sean Morris",
+  "version": "0.0.0",
+  "repository": "https://github.com/seanmorris/cv2-doc",
   "scripts": {
     "start": "brunch watch --server",
     "build": "brunch build --production"
   },
   "dependencies": {
-    "curvature": "0.0.48"
+    "curvature": "0.0.49"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0",
