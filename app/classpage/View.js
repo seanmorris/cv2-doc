@@ -301,6 +301,13 @@ export class View extends BaseView
 
 	arLen(x)
 	{
-		return x.length || Object.keys(x).length || 0;
+		if(!x)
+		{
+			return 0;
+		}
+
+		return x.length
+			|| Object.keys(x).length
+			|| 0;
 	}
 }
