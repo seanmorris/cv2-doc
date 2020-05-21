@@ -63,7 +63,6 @@ export class View extends BaseView
 		}
 
 		const pathname = '/class/' + encodeURIComponent(clickedClass.classname);
-		
 
 		Router.go(pathname);
 	}

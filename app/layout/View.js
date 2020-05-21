@@ -9,6 +9,8 @@ import { Home      } from './Home';
 import { WhatsThis } from './WhatsThis';
 import { Info      } from './Info';
 
+import { Config    } from 'Config';
+
 
 export class View extends BaseView
 {
@@ -16,9 +18,8 @@ export class View extends BaseView
 	{
 		super(args);
 
-		this.template = require('./view.tmp');
-
-		this.args.menu = this.args.menu || '';
+		this.template     = require('./view.tmp');
+		this.args.menu    = this.args.menu || '';
 		this.args.content = '';
 
 		const docs = this.args.docs;
@@ -28,8 +29,6 @@ export class View extends BaseView
 		this.routes = {
 
 			'': (args) => {
-
-				console.log('home', args);
 
 				return new Home;
 			}
@@ -48,7 +47,9 @@ export class View extends BaseView
 				this.args.content = new Loader;
 
 				return Repository.request(
-					'https://api.github.com/repos/seanmorris/ids/contents/README.md'
+					'https://api.github.com/repos/'
+						+ Config.repository
+						+ '/contents/README.md'
 					, {}, false, true, {
 						withCredentials: false
 						, responseType: 'text'
@@ -88,7 +89,9 @@ export class View extends BaseView
 				this.args.content = new Loader;
 
 				return Repository.request(
-					'https://api.github.com/repos/seanmorris/ids/contents/LICENSE'
+					'https://api.github.com/repos/'
+						+ Config.repository
+						+ '/contents/LICENSE'
 					, {}, false, true, {
 						withCredentials: false
 						, responseType: 'text'
@@ -115,9 +118,7 @@ export class View extends BaseView
 				});
 			}
 
-			, 'whats-this': () => {
-
-				console.log('home', args);
+			, 'whatsthis': () => {
 
 				return new WhatsThis;
 			}
@@ -131,25 +132,32 @@ export class View extends BaseView
 
 			, 'class/*': (args) => {
 
+				const content = new ClassPage();
+
 				const classname = decodeURIComponent(args.pathparts.join('\\'));
+				
+				const debind = this.args.bindTo('docs',
+					(v,k,t,d) => {
+						if(!v || !classname || !v[classname])
+						{
+							return;
+						}						
 
-				let content = '';
+						Object.assign(
+							content.args
+							, v[classname]
+							, {dump: JSON.stringify(v[classname], null, 4)}
+						);
 
+						const contentTag = this.findTag('.main-content');
 
-				if(docs[classname])
-				{
-					const dump = JSON.stringify(docs[classname], null, 4);
-					
-					content = new ClassPage(
-						Object.assign({}, docs[classname], {dump})
-					);
-				}
+						contentTag && contentTag.scrollTo({top:0});
 
-				const contentTag = this.findTag('.main-content');
+						document.activeElement.blur();
+					}
+				);
 
-				contentTag && contentTag.scrollTo({top:0});
-
-				document.activeElement.blur();
+				content.onRemove(debind);
 
 				return content;
 			}
@@ -168,6 +176,9 @@ export class View extends BaseView
 		this.args.menu.args.bindTo('active', (v) => {
 			this.args.menuActive = `menu-${v}`;
 		});
+
+		this.onTimeout(75, ()=> this.args.menuActive = `menu-active`);
+		this.onTimeout(150, ()=> this.args.menu.args.active = `active`);
 	}
 
 	deactivateMenu()

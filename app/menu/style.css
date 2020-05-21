@@ -71,7 +71,6 @@ body > .layout > .fill > .left-bar .menu::before {
 	
 }
 
-
 .menu.inactive li, .menu.inactive h6 {
 	pointer-events: none;
 	opacity: 0.5;

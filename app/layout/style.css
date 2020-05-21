@@ -38,6 +38,10 @@ body > .layout > .fill > .left-bar {
 	border-left: 1px solid #ccc;
 }
 
+body > .layout > .fill > .main-content {
+	overflow-y: hidden;
+}
+
 body > .layout:not(.menu-active) > .fill > .main-content {
 	overflow-y: auto;
 }
@@ -98,7 +102,7 @@ div.loader {
 }
 
 .home h1 {
-	font-size: 7.5em;
+	font-size: 4.5em;
 	line-height:  1em;
 	position: relative;
 }
@@ -125,7 +129,7 @@ div.loader {
 	right: 1rem;
 	text-align: right;
 	opacity: 0.5;
-	font-weight: 100;
+	font-weight: 800;
 }
 
 .plain {

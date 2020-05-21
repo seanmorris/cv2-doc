@@ -35,7 +35,7 @@
 	</p>
 
 	<small class = "mono">
-		<a href = "https://github.com/seanmorris/ids/blob/master/[[file]]#L[[lines.0]]" target = "_blank">
+		<a href = "[[sourceRoot]][[file]]#L[[_lines.0]]-L[[_lines.1]]" target = "_blank">
 			[[file]] : [[lines.0]] - [[lines.1]]
 		</a>
 	</small>
@@ -91,7 +91,7 @@
 
 	<div class = "row summary">
 
-		<div cv-if = "methods">
+		<div cv-if = "methodCount">
 			<h3>
 				<span class = "icon" data-icon = "/function.svg">
 					<img src = "/function.svg" />
@@ -99,36 +99,22 @@
 				methods
 			</h3>
 			<ul cv-each = "methods:method:m">
-				<li>
-<!-- 					<div cv-if = "!method.overrides" class = "row">
-						<span cv-if = "method.inherited" data-icon = "/inherit.svg">
-							<img src = "/inherit.svg" />
-						</span>
-					</div>
+				<li cv-with = "method" cv-carry = "m">
 
-					<span cv-if = "method.overrides" data-icon = "/override.svg">
-						<img src = "/override.svg" />
-					</span> -->
-
-					<span cv-if = "method.icon" data-icon = "[[method.icon]]">
-						<img src = "[[method.icon]]" />
+					<span cv-if = "icon" data-icon = "[[icon]]">
+						<img src = "[[icon]]" />
 					</span>
 
-					<span cv-if = "method.scopeIcon" data-icon = "[[method.scopeIcon]]">
-						<img src = "[[method.scopeIcon]]" />
+					<span cv-if = "scopeIcon" data-icon = "[[scopeIcon]]">
+						<img src = "[[scopeIcon]]" />
 					</span>
-
-<!-- 					<span cv-if = "method.refIcon" data-icon = "[[method.refIcon]]">
-						<img src = "[[method.refIcon]]" />
-					</span> -->
 
 					<a href = "#method-[[m]]" class = "mono">[[m]]()</a>
-
 				</li>
 			</ul>
 		</div>
 
-		<div cv-if = "properties">
+		<div cv-if = "propertyCount">
 			<h3>
 				<span class = "icon" data-icon = "/field.svg">
 					<img src = "/field.svg" />
@@ -136,32 +122,23 @@
 				properties
 			</h3>
 			<ul cv-each = "properties:property:p">
-				<li>
-<!-- 					<div cv-if = "!property.overrides" class = "row">
-						<span cv-if = "property.inherited" data-icon = "/inherit.svg">
-							<img src = "/inherit.svg" />
-						</span>
-					</div>
+				<li cv-with = "property" cv-carry = "p">
 
-					<span cv-if = "property.overrides" data-icon = "/override.svg">
-						<img src = "/override.svg" />
-					</span>
- -->
-					<span cv-if = "property.icon" data-icon = "[[property.icon]]">
-						<img src = "[[property.icon]]" />
+					<span cv-if = "icon" data-icon = "[[icon]]">
+						<img src = "[[icon]]" />
 					</span>
 
-					<span cv-if = "property.scopeIcon" data-icon = "[[property.scopeIcon]]">
-						<img src = "[[property.scopeIcon]]" />
+					<span cv-if = "scopeIcon" data-icon = "[[scopeIcon]]">
+						<img src = "[[scopeIcon]]" />
 					</span>
 
 					<a href = "#property-[[p]]" class = "mono f">[[p]]</a>
-					<small cv-if = "property.defaultString" class = "mono">= [[property.defaultString]]</small>
+					<small cv-if = "defaultString" class = "mono">= [[defaultString]]</small>
 				</li>
 			</ul>
 		</div>
 
-		<div cv-if = "constants">
+		<div cv-if = "constantCount">
 			<h3>
 				<span class = "icon" data-icon = "/constant.svg">
 					<img src = "/constant.svg" />
@@ -169,30 +146,30 @@
 				contstants
 			</h3>
 			<ul cv-each = "constants:constant:c">
-				<li>
-					<div cv-if = "!constant.overrides" class = "row">
-						<span cv-if = "constant.inherited" data-icon = "/inherit.svg">
+				<li cv-with = "constant" cv-carry = "c">
+					<div cv-if = "!overrides" class = "row">
+						<span cv-if = "inherited" data-icon = "/inherit.svg">
 							<img src = "/inherit.svg" />
 						</span>
 					</div>
 
-					<span cv-if = "constant.overrides" data-icon = "/override.svg">
+					<span cv-if = "overrides" data-icon = "/override.svg">
 						<img src = "/override.svg" />
 					</span>
 
-					<span cv-if = "constant.icon" data-icon = "[[constant.icon]]">
-						<img src = "[[constant.icon]]" />
+					<span cv-if = "icon" data-icon = "[[icon]]">
+						<img src = "[[icon]]" />
 					</span>
 
 					<a href = "#constant-[[c]]" class = "mono">[[c]]</a>
-					<small class = "mono">= [[constant.valueString]]</small>
+					<small class = "mono">= [[valueString]]</small>
 				</li>
 			</ul>
 		</div>
 
 	</div>
 
-	<div cv-if = "methods">
+	<div cv-if = "methodCount">
 		<h3>
 			<span class = "icon" data-icon = "/function.svg">
 				<img src = "/function.svg" />
@@ -266,7 +243,7 @@
 
 					<span class = "row b" cv-if = "file">
 						<h5>file:</h5>
-						<a href = "https://github.com/seanmorris/ids/blob/master/[[file]]#L[[lines.0]]" target = "_blank">
+						<a href = "[[sourceRoot]][[file]]#L[[lines.0]]-L[[lines.1]]" target = "_blank">
 							<span cv-bind = "file" class = "mono"></span>
 							&nbsp;:&nbsp;<span cv-bind = "lines.0" class = "mono"></span>
 							&nbsp;-&nbsp;<span cv-bind = "lines.1" class = "mono"></span>
@@ -300,17 +277,11 @@
 						</div>
 					</div>
 				</div>
-
-				<!-- <div class = "pad-horizontal pad-bottom">
-					<h5>tags</h5>
-					<span class = "pre" cv-bind = "rawTags"></span>
-				</div> -->
-
 			</li>
 		</ul>
 	</div>
 
-	<div cv-if = "properties">
+	<div cv-if = "propertyCount">
 		<h3>
 			<span class = "icon" data-icon = "/field.svg">
 				<img src = "/field.svg" />
@@ -381,7 +352,7 @@
 
 					<span class = "row b" cv-if = "file">
 						<h5>file:</h5>
-						<a href = "https://github.com/seanmorris/ids/blob/master/[[file]]#L[[lines.0]]" target = "_blank">
+						<a href = "[[sourceRoot]][[file]]#L[[lines.0]]-L[[lines.1]]" target = "_blank">
 							<span cv-bind = "file" class = "mono"></span>
 						</a>
 					</span>
@@ -398,7 +369,8 @@
 		</ul>
 	</div>
 
-	<div cv-if = "constants">
+
+	<div cv-if = "constantCount">
 		<h3>
 			<span class = "icon" data-icon = "/constant.svg">
 				<img src = "/constant.svg" />
@@ -446,7 +418,7 @@
 
 					<span class = "row b" cv-if = "file">
 						<h5>file:</h5>
-						<a href = "https://github.com/seanmorris/ids/blob/master/[[file]]#L[[lines.0]]" target = "_blank">
+						<a href = "[[sourceRoot]][[file]]#L[[lines.0]]-L[[lines.1]]" target = "_blank">
 							<span cv-bind = "file" class = "mono"></span>
 						</a>
 					</span>
