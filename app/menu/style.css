@@ -77,6 +77,10 @@ body > .layout > .fill > .left-bar .menu::before {
 	filter: grayscale(1);
 }
 
+.menu.inactive b {
+	opacity: 0.333;
+}
+
 .menu small {
 	font-size: 0.85em;
 }

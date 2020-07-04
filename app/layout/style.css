@@ -39,10 +39,10 @@ body > .layout > .fill > .left-bar {
 }
 
 body > .layout > .fill > .main-content {
-	overflow-y: hidden;
+	/*overflow-y: hidden;*/
 }
 
-body > .layout:not(.menu-active) > .fill > .main-content {
+body > .layout > .fill > .main-content {
 	overflow-y: auto;
 }
 
@@ -78,6 +78,7 @@ a[href] {
 }
 
 div.loader {
+	pointer-events: none;
 	background-image: url('./spin.svg');
 	background-repeat: no-repeat;
 	background-position: center;
@@ -85,7 +86,7 @@ div.loader {
 	object-fit: contain;
 	object-position: center;
 	display: block;
-	z-index: 3;
+	z-index: 25;
 	width: 100%;
 	height: 100%;
 	top: 0px;
@@ -96,9 +97,8 @@ div.loader {
 .home {
 	min-height: 100%;
 	display: flex;
-	align-items: center;
 	justify-content: center;
-	text-align: right;
+	padding-left: 3em;
 }
 
 .home h1 {
@@ -110,10 +110,8 @@ div.loader {
 .home h1::after {
 	content: '℠';
 	font-size: 1.75rem;
-	position: absolute;
-	top: 0px;
-	right: 0px;
-	width: 0px;
+	position: relative;
+	top: -0.5em;
 	overflow: visible;
 	padding: 2px;
 }

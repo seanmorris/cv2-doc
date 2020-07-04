@@ -1,6 +1,8 @@
 import { Config } from 'Config';
 import { Router } from 'curvature/base/Router';
 
+import { Head      } from '../Head';
+
 import { View as BaseView } from 'curvature/base/View';
 
 export class View extends BaseView
@@ -210,6 +212,10 @@ export class View extends BaseView
 		const summary   = summaryLines.join("\n");
 		const bodyLines = [];
 		const tagLines  = [];
+
+		Head.get().args.description = summary
+			? `${summary} - ${Config.title}`
+			: `View the documentation for ${this.args.classname}`;
 
 		for(const line of lines)
 		{

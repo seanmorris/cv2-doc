@@ -2,80 +2,118 @@
 
 <div class = "menu [[active]]" cv-on = "click:activate(event)" tabindex="0">
 
-	<b class = "pad-horizontal"><small>Pages</small></b>
 
-	<ul cv-if = "!filter">
-		
-		<li class = "pad-horizontal" tabindex="0">
-			<a class = "row nowrap" href = "/" cv-on = "click:click(event, '');">
-				<span data-icon = "/home.svg" title = "home">
-					<img src = "/home.svg" />
+	<!-- <b class = "pad-horizontal"><small>Pages</small></b> -->
+
+	<div cv-if = "!filter">
+
+		<ul cv-each = "pages:page:p">
+
+			<li class = "pad-horizontal" tabindex="0">
+				<a class = "row nowrap" cv-link = "[[p|pageLink]]">
+					<span data-icon = "/home.svg" title = "[[p]]">
+						<img cv-attr = "src:page.icon" />
+					</span>
+					[[p|pageTitle]]
+				</a>
+			</li>
+
+		</ul>
+
+<!-- 		<ul>
+			<li class = "pad-horizontal" tabindex="0">
+				<a
+					class = "row nowrap classname"
+					href  = "/class/"
+					cv-on = "click:click(event, class);blur:deactivate(event);"
+				>
+					<span data-icon = "/github.svg" title = "final class">
+						<img src = "/github.svg" />
+					</span>				
+					sign in with github
 				</span>
-				home
-			</a>
-		</li>
-		
-		<li class = "pad-horizontal" tabindex="0">
-			<a class = "row nowrap" href = "/readme" cv-on = "click:click(event, 'readme');">
-				<span data-icon = "/readme.svg" title = "readme">
-					<img src = "/readme.svg" />
+				</a>
+			</li>
+		</ul> -->
+
+	</div>
+
+	<div cv-if = "filter">
+		<b class = "pad-horizontal"><small>Search</small></b>
+
+		<small class = "pad-horizontal" cv-if = "!filteredClasses">
+			No results for "[[filter]]".
+		</small>
+
+		<ul cv-each = "filteredClasses:class:c">
+			<li class = "pad-horizontal" tabindex="0">
+				<a
+					class = "row nowrap classname"
+					href  = "/class/[[class.classname|encodeURI]]"
+					cv-on = "click:click(event, class);blur:deactivate(event);"
+				>
+					<span cv-if = "class.final" data-icon = "/final.svg" title = "final class">
+						<img src = "/final.svg" />
+					</span>
+
+					<span cv-if = "class.abstract" data-icon = "/abstract.svg" title = "abstract class">
+						<img src = "/abstract.svg" />
+					</span>
+
+					<div cv-if = "class.isPlainClass" data-icon = "/icosahedron.svg" title = "class">
+						<img src = "/icosahedron.svg" />
+					</div>
+
+					<span cv-if = "class.isTrait" data-icon = "/trait.svg" title = "trait">
+						<img src = "/trait.svg" />
+					</span>
+
+					<span cv-if = "class.isInterface" data-icon = "/interface.svg" title = "interface">
+						<img src = "/interface.svg" />
+					</span>
+				
+					[[class.classname]]
 				</span>
-				readme
-			</a>
-		</li>
+				</a>
+			</li>
+		</ul>
 
-		<li class = "pad-horizontal" tabindex="0">
-			<a class = "row nowrap" href = "/license" cv-on = "click:click(event, 'license');">
-				<span data-icon = "/license.svg" title = "license class">
-					<img src = "/license.svg" />
+	</div>
+
+	<div cv-if = "!filter">
+		<b class = "pad-horizontal"><small>Classes</small></b>
+		<ul cv-each = "docs:class:c">
+			<li class = "pad-horizontal" tabindex="0">
+				<a
+					class = "row nowrap classname"
+					href  = "/class/[[class.classname|encodeURI]]"
+					cv-on = "click:click(event, class);blur:deactivate(event);"
+				>
+					<span cv-if = "class.final" data-icon = "/final.svg" title = "final class">
+						<img src = "/final.svg" />
+					</span>
+
+					<span cv-if = "class.abstract" data-icon = "/abstract.svg" title = "abstract class">
+						<img src = "/abstract.svg" />
+					</span>
+
+					<div cv-if = "class.isPlainClass" data-icon = "/icosahedron.svg" title = "class">
+						<img src = "/icosahedron.svg" />
+					</div>
+
+					<span cv-if = "class.isTrait" data-icon = "/trait.svg" title = "trait">
+						<img src = "/trait.svg" />
+					</span>
+
+					<span cv-if = "class.isInterface" data-icon = "/interface.svg" title = "interface">
+						<img src = "/interface.svg" />
+					</span>
+				
+					[[class.classname]]
 				</span>
-				license
-			</a>
-		</li>
-
-		<li class = "pad-horizontal" tabindex="0">
-			<a class = "row nowrap" href = "/whats-this?" cv-on = "click:click(event, 'whatsthis');">
-				<span data-icon = "/info.svg" title = "info class">
-					<img src = "/info.svg" />
-				</span>
-				what's this?
-			</a>
-		</li>
-	</ul>
-
-	<b class = "pad-horizontal"><small>Classes</small></b>
-
-	<ul cv-each = "filteredClasses:class:c">
-		<li class = "pad-horizontal" tabindex="0">
-			<a
-				class = "row nowrap classname"
-				href  = "/class/[[class.classname|encodeURI]]"
-				cv-on = "click:click(event, class);blur:deactivate(event);"
-			>
-				<span cv-if = "class.final" data-icon = "/final.svg" title = "final class">
-					<img src = "/final.svg" />
-				</span>
-
-				<span cv-if = "class.abstract" data-icon = "/abstract.svg" title = "abstract class">
-					<img src = "/abstract.svg" />
-				</span>
-
-				<div cv-if = "class.isPlainClass" data-icon = "/icosahedron.svg" title = "class">
-					<img src = "/icosahedron.svg" />
-				</div>
-
-				<span cv-if = "class.isTrait" data-icon = "/trait.svg" title = "trait">
-					<img src = "/trait.svg" />
-				</span>
-
-				<span cv-if = "class.isInterface" data-icon = "/interface.svg" title = "interface">
-					<img src = "/interface.svg" />
-				</span>
-			
-				[[class.classname]]
-			</span>
-			</a>
-		</li>
-	</ul>
+				</a>
+			</li>
+		</ul>
+	</div>
 
 </div>

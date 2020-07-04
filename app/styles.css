@@ -1,0 +1,9 @@
+.home p.version, .home p.tagline {
+	line-height: 1em;
+	margin-bottom: 0em;
+	margin-top: 0em;
+}
+
+.home p.version {
+	margin-bottom: 1em;
+}

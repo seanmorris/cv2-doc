@@ -1,4 +1,38 @@
-<div class = "[[classList]]">
+<div itemscope itemtype = "https://schema.org/APIReference" class = "[[classList]]" cv-if = "classname">
+	<meta itemprop="assemblyVersion" content = "PHP 7+" />
+	<meta itemprop="license" content = "https://www.apache.org/licenses/LICENSE-2.0" />
+	<meta itemprop="dependencies" content = "PHP 7+" />
+	<meta itemprop="inLanguage" content = "PHP 7+" />
+	<meta itemprop="dependencies" content = "Kafka" />
+	<meta itemprop="dependencies" content = "Ksql" />
+	<meta itemprop = "keywords" content = "ksql,php,kafka" />
+	<meta itemprop="programmingModel" content = "Object Oriented" />
+
+	<meta itemprop = "url" content = "[[sourceRoot]][[file]]" />
+
+	<span itemprop = "editor" itemscope itemtype="http://schema.org/Person">
+		<meta itemprop="name" content = "[[author]]" />
+		<meta itemprop = "url" content = "https://ksqlc.docs.unholysh.it/page/author" />
+	</span>
+
+	<span itemprop = "creator" itemscope itemtype="http://schema.org/Person">
+		<meta itemprop="name" content = "[[author]]" />
+		<meta itemprop = "url" content = "https://ksqlc.docs.unholysh.it/page/author" />
+	</span>
+
+	<span itemprop = "maintainer" itemscope itemtype="http://schema.org/Person">
+		<meta itemprop="name" content = "[[author]]" />
+		<meta itemprop = "url" content = "https://ksqlc.docs.unholysh.it/page/author" />
+	</span>
+
+	<span itemprop="isPartOf" itemscope itemtype="https://schema.org/SoftwareApplication">
+		<meta itemprop = "name" content = "ksqlc" />
+		<meta itemprop = "url" content = "https://ksqlc.docs.unholysh.it/" />
+		<meta itemprop = "applicationCategory" content = "package" />
+		<meta itemprop = "operatingSystem" content = "Windows 7, Max OSX 10.7, Linux">
+    </div>
+	
+
 	<h2 class = "mono">
 		<span cv-if = "final" data-icon = "/final.svg">
 			<img src = "/final.svg" />
@@ -19,7 +53,7 @@
 		<span cv-if = "isInterface" data-icon = "/interface.svg">
 			<img src = "/interface.svg" />
 		</span>
-		[[shortname]]
+		<span itemprop = "name" content = "[[shortname]]">[[shortname]]</span>
 	</h2>
 
 	<p class = "collapsible class-types row">
@@ -30,12 +64,12 @@
 		<span cv-if = "isInterface">interface</span>
 		<span cv-if = "isTrait">trait</span>
 		<small class = "mono">
-			<b>[[classname]]</b>
+			<b itemprop="alternateName" content = "[[classname]]">[[classname]]</b>
 		</small>
 	</p>
 
 	<small class = "mono">
-		<a href = "[[sourceRoot]][[file]]#L[[lines.0]]-L[[lines.1]]" target = "_blank">
+		<a href = "[[sourceRoot]][[file]]#L[[lines.0]]-L[[lines.1]]" target = "_blank" itemprop = "executableLibraryName" content = "[[file]]">
 			[[file]] : [[lines.0]] - [[lines.1]]
 		</a>
 	</small>
@@ -45,13 +79,13 @@
 	</span>
 
 	<span cv-if = "notes.body">
-		<span data-collapse = "main">
+		<span data-collapse = "main" >
 			<a href = "#" cv-on = 'click:expand(event, "main")'>more...</a>
 		</span>
 		<span data-expand = "main">
 			<a href = "#" cv-on = 'click:expand(event, "main")'>less</a>
 			<br />
-			<span class ="pre"><p cv-bind = "notes.body"></p></span>
+			<span class ="pre" itemprop = "articleSection"><p cv-bind = "notes.body"></p></span>
 		</span>
 	</span>
 
@@ -177,7 +211,7 @@
 			methods
 		</h3>
 		<ul class = "methods details" cv-each = "methods:method:m">
-			<li cv-with = "method" cv-carry = "m,sourceRoot"  id = "method-[[m]]" class = "entry">
+			<li itemprop = "articleSection" cv-with = "method" cv-carry = "m,sourceRoot"  id = "method-[[m]]" class = "entry">
 
 				<div class = "row pad">
 					<span class = "icon" data-icon = "/function.svg">
@@ -289,7 +323,7 @@
 			properties
 		</h3>
 		<ul class = "properties details" cv-each = "properties:property:p">
-			<li cv-with = "property" cv-carry = "p,sourceRoot"  id = "property-[[p]]" class = "entry">
+			<li itemprop = "articleSection" cv-with = "property" cv-carry = "p,sourceRoot"  id = "property-[[p]]" class = "entry">
 
 				<div class = "row pad">
 
@@ -378,7 +412,7 @@
 			contstants
 		</h3>
 		<ul class = "properties details" cv-each = "constants:constant:c">
-			<li cv-with = "constant" cv-carry = "c,sourceRoot"  id = "constant-[[c]]" class = "entry">
+			<li itemprop = "articleSection" cv-with = "constant" cv-carry = "c,sourceRoot"  id = "constant-[[c]]" class = "entry">
 
 				<div class = "row pad">
 					<span class = "icon" data-icon = "/constant.svg">

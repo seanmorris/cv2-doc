@@ -1,9 +1,21 @@
 <div class = "layout [[menuActive]]">
 
 	<div class = "fill">
-		<div cv-bind = "menu"    class = "left-bar"></div>
-		<div cv-bind = "content" class = "main-content" cv-on = "click:deactivateMenu(event)"></div>
+		<div
+			class = "left-bar"
+			cv-bind = "menu"></div>
+		<div
+			class   = "main-content"
+			cv-bind = "content"
+			cv-on   = "
+				click:deactivateMenu(event);
+				scroll:deactivateMenu(event):p
+			"></div>
 	</div>
 
 	<!-- <div class = "footer">cv2-doc&copy 2019 - 2020 Sean Morris</div> -->
 </div>
+
+[[loader]]
+
+[[modals]]

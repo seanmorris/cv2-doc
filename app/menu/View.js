@@ -11,41 +11,34 @@ export class View extends BaseView
 		this.template = require('./view.tmp');
 
 		this.args.prefix = '';
-		this.args.filter = '';
+		this.args.filter = this.args.filter || '';
 		this.args.active = 'inactive';
 
 		this.args.filteredClasses = this.args.filteredClasses || [];
 
-		this.args.docs = this.args.docs || [];
+		this.args.docs  = this.args.docs  || {};
+		this.args.pages = this.args.pages || {};
 
 		this.classBank = {};
+
 		this.loaded    = false;
 
 		this.args.bindTo('docs', (v) => {
-
-			if(this.loaded || !Object.keys(v).length)
-			{
-				return;
-			}
-
-			this.loaded = true;
-
-			const docs = v;
 
 			this.args.bindTo('filter', (v) => {
 
 				const prefix = this.args.prefix;
 
-				const classes = Object.keys(docs).map(c => {
+				const classes = Object.keys(this.args.docs).map(c => {
 
 					if(!this.classBank[c])
 					{
-						this.classBank[c] = docs[c];
+						this.classBank[c] = this.args.docs[c];
 						
-						docs[c].showClassname = c;
+						this.args.docs[c].showClassname = c;
 					}
 
-					return docs[c];
+					return this.args.docs[c];
 				});
 
 				if(v)
@@ -54,7 +47,7 @@ export class View extends BaseView
 				}
 				else
 				{
-					Router.setQuery('q', '');
+					Router.setQuery('q', undefined);
 				}
 
 				this.args.filteredClasses = classes.filter(
@@ -108,6 +101,39 @@ export class View extends BaseView
 
 	encodeURI(x)
 	{
+		x.replace(' ', '-');
+
 		return encodeURIComponent(x);
+	}
+
+	toJson(input)
+	{
+		console.log(input);
+
+		return JSON.stringify(input);
+	}
+
+	pageLink(p)
+	{
+		const page = this.args.pages[p];
+
+		if(!page)
+		{
+			return '#undefined';
+		}
+
+		return page.link || `/page/${this.encodeURI(p)}`;
+	}
+
+	pageTitle(p)
+	{
+		const page = this.args.pages[p];
+
+		if(!page)
+		{
+			return '#undefined';
+		}
+
+		return page.title || p;
 	}
 }

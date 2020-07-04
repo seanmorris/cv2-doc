@@ -11,7 +11,7 @@ export class Home extends BaseView
 
 		this.template = require('./home.tmp');
 
-		this.args.loader = new Loader;
+		// this.args.loader = new Loader;
 
 		this.args.links   = Config.homeLinks;
 		this.args.tagline = Config.tagline;
@@ -20,6 +20,6 @@ export class Home extends BaseView
 		
 		this.args.copyright  = Config.copyright;
 
-		this.onTimeout(750, ()=>this.args.loader = '');
+		// this.onTimeout(750, ()=>this.args.loader = '');
 	}
 }
