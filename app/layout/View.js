@@ -117,18 +117,7 @@ export class View extends BaseView
 
 	setStatusCode(code = 200)
 	{
-		const metaStatus = document.head.querySelector('[name="prerender-status-code"]');
-		const httpEquiv  = document.head.querySelector('[http-equiv="Status"]');
-
-		if(metaStatus)
-		{
-			metaStatus.setAttribute('content', code);
-		}
-		
-		if(httpEquiv)
-		{
-			httpEquiv.setAttribute('content', code);
-		}
+		Head.get().args.status = code;
 	}
 
 	loadClassPage(args)
@@ -138,7 +127,7 @@ export class View extends BaseView
 
 		const debind = this.args.bindTo('docs', (v,k,t,d) => {
 
-			this.setStatusCode(500);
+			this.setStatusCode(0);
 
 			if(!v || !classname || !v[classname])
 			{
@@ -152,15 +141,11 @@ export class View extends BaseView
 				, {dump: JSON.stringify(v[classname], null, 4)}
 			);
 
-			Head.get().args.title = `${classname} - ${Config.title}`;
-
 			const contentTag = this.findTag('.main-content');
 
 			contentTag && contentTag.scrollTo({top:0});
 
 			document.activeElement.blur();
-			
-			this.setStatusCode(200);
 		});
 
 		this.args.loader = new Loader;
@@ -172,12 +157,18 @@ export class View extends BaseView
 			this.deactivateMenu();
 
 			this.onTimeout(250, () => {
+				this.setStatusCode(200);
+
+				console.log(content.args.summary, content.args);
+
+				Head.get().args.title = `${content.args.shortname} Class - ${Config.title}`;
+				Head.get().args.description = content.args.notes.summary
+					? `${content.args.notes.summary} - ${Config.title}`
+					: `View the documentation for ${content.args.shortname} - ${Config.title}`;
 
 				this.args.loader = '';
-				
 
 				accept(content);
-
 			});
 
 		});
@@ -185,7 +176,7 @@ export class View extends BaseView
 
 	loadTemplatePage(args)
 	{
-		this.setStatusCode(500);
+		this.setStatusCode(0);
 
 		const pageKey = decodeURIComponent(args.page);
 		const pages   = Config.pages;
@@ -198,8 +189,6 @@ export class View extends BaseView
 			document.activeElement.blur()
 			return;
 		}
-
-		this.setStatusCode(200);
 
 		this.args.loader  = new Loader;
 
@@ -231,18 +220,20 @@ export class View extends BaseView
 
 			return new Promise(accept => {
 
+				Head.get().args.title = page.title
+					? `${page.title} - ${Config.title}`
+					: Config.title;
+
+				Head.get().args.description = page.description
+					? `${page.description}`
+					: '';
+				accept(view);
+
+				this.setStatusCode(200);
+
 				this.onTimeout(250, () => {
 
-					Head.get().args.title = page.title
-						? `${page.title} - ${Config.title}`
-						: Config.title;
-					
-					Head.get().args.description = page.description
-						? `${page.description}`
-						: '';
-
 					this.args.loader = '';
-					accept(view);
 
 				});
 

@@ -14,10 +14,9 @@ import { Head } from './Head';
 document.addEventListener('DOMContentLoaded', () => {
 	let l = 0;
 
-	const menu   = new MenuView();
 	const pages  = Config.pages;
+	const menu   = new MenuView();
 	const layout = new LayoutView({menu,pages});
-	const head   = Head.get();
 	const remote = new RemoteFile(Config.source);
 
 	remote.readLines((line) => {
@@ -39,24 +38,21 @@ document.addEventListener('DOMContentLoaded', () => {
 			}
 		}
 
-	}).catch(error => {
-	
-		console.log(error)
-	
 	}).finally(() => {
-		Router.listen(layout);		
+
+		const head = Head.get();
 
 		menu.args.filter = Router.queryOver({}).q || '';
 
 		RuleSet.add('body', layout);
-		
-		RuleSet.add('head', tag => {
-
-			head.render(tag.element);
-
-		});
-		
+		RuleSet.add('head', tag => head.render(tag.element));
 		RuleSet.apply();
+
+		Router.listen(layout);
+
+	}).catch(error => {
+
+		console.log(error)
 
 	});
 });

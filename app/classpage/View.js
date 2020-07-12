@@ -1,8 +1,6 @@
 import { Config } from 'Config';
 import { Router } from 'curvature/base/Router';
 
-import { Head      } from '../Head';
-
 import { View as BaseView } from 'curvature/base/View';
 
 export class View extends BaseView
@@ -45,7 +43,7 @@ export class View extends BaseView
 			if(!v) { v = '' }
 			Object.assign(this.args.notes, this.processDocComment(v));
 			this.args.rawTags = JSON.stringify(this.args.notes.tags, null, 4);
-			
+
 		});
 
 		this.args.methodCount = 0;
@@ -56,7 +54,7 @@ export class View extends BaseView
 			{
 				return;
 			}
-			
+
 			this.args.methodCount = Object.keys(v).length;
 
 			for(const m in v)
@@ -109,9 +107,9 @@ export class View extends BaseView
 			{
 				return;
 			}
-			
+
 			this.args.propertyCount = Object.keys(v).length;
-			
+
 			for(const p in v)
 			{
 				const property = v[p];
@@ -134,7 +132,7 @@ export class View extends BaseView
 					property.encodedClass = encodeURIComponent(property.class);
 					property.inherited = true;
 				}
-			}			
+			}
 		});
 
 		this.args.constantCount = 0;
@@ -181,7 +179,7 @@ export class View extends BaseView
 					.filter(x=>x)
 					.join(' ');
 
-			}, {wait: 0});			
+			}, {wait: 0});
 		});
 
 	}
@@ -213,13 +211,12 @@ export class View extends BaseView
 		const bodyLines = [];
 		const tagLines  = [];
 
-		Head.get().args.description = summary
-			? `${summary} - ${Config.title}`
-			: `View the documentation for ${this.args.classname}`;
+		this.args.summary = summary;
+
+		console.log(summary);
 
 		for(const line of lines)
 		{
-
 			if(line.match(/^@/))
 			{
 				tagLines.push(line);

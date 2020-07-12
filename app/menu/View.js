@@ -43,11 +43,11 @@ export class View extends BaseView
 
 				if(v)
 				{
-					Router.setQuery('q', v);
+					Router.setQuery('q', v, true);
 				}
 				else
 				{
-					Router.setQuery('q', undefined);
+					Router.setQuery('q', undefined, true);
 				}
 
 				this.args.filteredClasses = classes.filter(
@@ -65,7 +65,7 @@ export class View extends BaseView
 
 				});
 
-			}, {wait: 300});
+			});
 
 		}, {wait: 0});
 
@@ -135,5 +135,17 @@ export class View extends BaseView
 		}
 
 		return page.title || p;
+	}
+
+	linkTitle(p)
+	{
+		const page = this.args.pages[p];
+
+		if(!page)
+		{
+			return '#undefined';
+		}
+
+		return page.linkTitle || p;
 	}
 }

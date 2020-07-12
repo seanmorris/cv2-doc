@@ -5,8 +5,14 @@ export class Rak
 	constructor(options)
 	{
 		this.url    = options.url || false;
-		this.delim  = "\n";
 		this.remote = null;
+		this.mode   = this.constructor.ERROR_MODE;
+		this.escape = false;
+		this.key    = undefined;
+		this.header = undefined;
+		this.source = undefined;
+
+		this.headerParsed = undefined;
 	}
 
 	read()
@@ -16,16 +22,56 @@ export class Rak
 			this.remote = new RemoteFile(this.url);
 		}
 
+		this.mode = this.constructor.KEY_MODE;
+
+		this.remote.readLine();
+
 		this.remote.readBytes(1).then(([byte])=>{
 
-			switch(byte)
+			const char = String.fromCharCode(byte);
+
+			if(!this.escape && char === ';')
 			{
-				case 0x3A: // ':'
+				this.mode++;
 			}
 
+			if(char === '\\')
+			{
+				this.escape = true;
+			}
+
+			this.escape = false;
 		});
 	}
 }
+
+[
+	'ERROR_MODE',    'KEY_MODE'
+	, 'HEADER_MODE', 'HEADER_DONE_MODE'
+	, 'VALUE_MODE',  'VALUE_DONE_MODE'
+].map((constName, constValue)=>{
+	Object.assign(Rak, constName, {
+		configurable: false
+		, writable:   false
+		, value:      constValue
+	});
+})
+
+/**
+Simpler Grammar:
+
+value
+	100
+	"string"
+	["list"]
+	{"object":"json"}
+
+value
+;value
+key;;value
+key;header;header;;value
+
+**/
 
 /* rak grammar:
 
