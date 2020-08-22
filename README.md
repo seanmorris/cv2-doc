@@ -8,7 +8,7 @@ cv2-doc can be hosted in github pages.
 
 cv2-doc is **serverless**.
 
-See an example [*here*](http://docs.ids.seanmorr.is/)
+See an example [*here*](http://docs.ksqlc.seanmorr.is/)
 
 ## Getting started
 
